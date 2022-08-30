@@ -1,11 +1,9 @@
 package com.maveric.userservice.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.maveric.userservice.enumeration.Gender;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,7 +23,7 @@ public class User {
     private String email;
     private String address;
     private String dateOfBirth;
-    private String gender;
+    private Gender gender;
 
 }
 

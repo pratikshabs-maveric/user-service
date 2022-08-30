@@ -1,5 +1,6 @@
 package com.maveric.userservice.dto;
 
+import com.maveric.userservice.enumeration.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,5 @@ public class UserResponse {
     private String email;
     private String address;
     private String dateOfBirth;
-    private String gender;
+    private Gender gender;
 }

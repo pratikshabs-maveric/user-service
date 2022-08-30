@@ -1,6 +1,7 @@
 package com.maveric.userservice.service;
 
 import com.maveric.userservice.dto.UserResponse;
+import com.maveric.userservice.exceptionhandler.EmailNotFound;
 import com.maveric.userservice.exceptionhandler.UserNotExist;
 import com.maveric.userservice.mapper.UserMapper;
 import com.maveric.userservice.model.User;
@@ -58,6 +59,9 @@ public class UserServiceImpl implements UserService {
 
     public UserResponse getUserDetailsByEmail(String email) {
         User getEmailResult = repository.findByEmail(email);
+        if ( getEmailResult == null ) {
+            throw new EmailNotFound("Email not Found");
+        }
         return mapper.map(getEmailResult);
     }
 
