@@ -1,22 +1,22 @@
 package com.maveric.userservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-@Getter
-@Setter
-@NoArgsConstructor
+import javax.persistence.*;
+import java.util.Date;
+
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name="UserD")
+@Data
+@Builder
+@Table(name = "UserDetails")
 public class User {
 
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String firstName;
     private String lastName;
@@ -26,6 +26,6 @@ public class User {
     private String address;
     private String dateOfBirth;
     private String gender;
-    private String password;
 
 }
+
