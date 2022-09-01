@@ -42,7 +42,7 @@ public class UserController {
         return new ResponseEntity<UserResponse>(userService.updateUser(userId, User), HttpStatus.OK);
     }
 
-    // Delete user
+    // Delete user using REST API
     @DeleteMapping("{userId}")
     public ResponseEntity<String> deleteUser(@PathVariable String userId) {
         String result = userService.deleteUser(userId);
