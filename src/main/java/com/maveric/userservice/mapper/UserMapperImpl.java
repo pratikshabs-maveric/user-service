@@ -20,8 +20,8 @@ public class UserMapperImpl implements UserMapper {
                 userResponse.getEmail(),
                 userResponse.getAddress(),
                 userResponse.getDateOfBirth(),
-                userResponse.getGender()
-
+                userResponse.getGender(),
+                userResponse.getPassword()
         );
     }
 
@@ -36,7 +36,8 @@ public class UserMapperImpl implements UserMapper {
                 user.getEmail(),
                 user.getAddress(),
                 user.getDateOfBirth(),
-                user.getGender()
+                user.getGender(),
+                user.getPassword()
         );
     }
 

@@ -1,16 +1,22 @@
 package com.maveric.userservice.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.maveric.userservice.enumeration.Gender;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Data
 @Builder
-@Table(name = "UserDetails")
+@Table(name = "User_Details")
 public class User {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +30,6 @@ public class User {
     private String address;
     private String dateOfBirth;
     private Gender gender;
-
+    private String Password;
 }
 

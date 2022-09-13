@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/api/v1/users")
@@ -18,13 +19,15 @@ public class UserController {
     UserService userService;
 
     // Get the list of users
+    @GetMapping
     public ResponseEntity<List<UserResponse>> getUsers(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer pageSize){
         List<UserResponse> userResponses = userService.getUsers(page,pageSize);
         return new ResponseEntity<List<UserResponse>>(userResponses, HttpStatus.OK);
     }
 
     // Create user using REST API
-    public ResponseEntity<UserResponse> createUser(@RequestBody UserResponse userResponse) {
+    @PostMapping
+    public ResponseEntity<UserResponse> createUser(@Valid  @RequestBody UserResponse userResponse) {
         UserResponse userDtoResponse = userService.createUser(userResponse);
         return new ResponseEntity<UserResponse>(userDtoResponse, HttpStatus.OK);
     }

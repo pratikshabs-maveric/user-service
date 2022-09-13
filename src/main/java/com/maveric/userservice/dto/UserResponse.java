@@ -1,22 +1,51 @@
 package com.maveric.userservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.maveric.userservice.enumeration.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.*;
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UserResponse {
 
     private long id;
+    @NotEmpty(message = "Please enter firstName")
+    @Size(min=2, message = "Length should be more than 2 CHARACTERS")
     private String firstName;
+
+    @NotEmpty(message = "Please enter lastName")
+    @Size(min=2, message = "Length should be more than 2 CHARACTERS")
     private String lastName;
+
+
     private String middleName;
+
+    @NotEmpty(message = "Please enter Phone Number")
+    @Size(min=10, max=10, message = "Number cannot be Less than 10 DIGITS")
     private String phoneNumber;
+
+    @NotBlank(message = "Please Enter the email")
+    @Email(message = "Provide Valid Email")
     private String email;
+
+    @NotEmpty(message = "Please enter the address")
     private String address;
+
+    @NotNull(message = "Date of Birth is mandatory")
     private String dateOfBirth;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Gender is mandatory 'MALE' or 'FEMALE'")
     private Gender gender;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @NotBlank(message = "Password is mandatory")
+    private String Password;
 }
