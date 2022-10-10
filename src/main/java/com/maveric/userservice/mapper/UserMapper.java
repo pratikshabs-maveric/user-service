@@ -14,4 +14,6 @@ public interface UserMapper {
     UserResponse map(User user);
 
     List<User> map (List<UserResponse> userResponses);
+
+//    List<User> mapToModel (List<UserResponse> userResponse);
 }

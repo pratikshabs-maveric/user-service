@@ -5,6 +5,7 @@ import com.maveric.userservice.model.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -50,4 +51,24 @@ public class UserMapperImpl implements UserMapper {
         }
         return list;
     }
+
+
+//    @Override
+//    public List<User> mapToModel(List<UserResponse> userResponse) {
+//        if(!UserResponse.isEmpty())
+//            return UserResponse.stream().map(user -> new User(
+//                    userResponse.getId(),
+//                    userResponse.getFirstName(),
+//                    userResponse.getLastName(),
+//                    userResponse.getMiddleName(),
+//                    userResponse.getPhoneNumber(),
+//                    userResponse.getEmail(),
+//                    userResponse.getAddress(),
+//                    userResponse.getDateOfBirth(),
+//                    userResponse.getGender(),
+//                    userResponse.getPassword()
+//            )).toList();
+//        else
+//            return Collections.<User>emptyList();
+//    }
 }

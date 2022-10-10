@@ -31,5 +31,6 @@ public class User {
     private String dateOfBirth;
     private Gender gender;
     private String Password;
+
 }
 
