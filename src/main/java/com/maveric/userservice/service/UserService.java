@@ -1,6 +1,7 @@
 package com.maveric.userservice.service;
 
 import com.maveric.userservice.dto.UserResponse;
+import com.maveric.userservice.exceptionhandler.EmailAlreadyExist;
 import com.maveric.userservice.exceptionhandler.EmailNotFound;
 import com.maveric.userservice.exceptionhandler.UserNotExist;
 import com.maveric.userservice.model.User;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public interface UserService {
     public List<UserResponse> getUsers(Integer page, Integer pageSize);
-    public UserResponse createUser(UserResponse userResponse);
+    public UserResponse createUser(UserResponse userResponse) throws EmailAlreadyExist;
 
     public UserResponse getUserDetails(String userId);
 

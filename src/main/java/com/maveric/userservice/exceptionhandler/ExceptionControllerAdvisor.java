@@ -26,22 +26,40 @@ public class ExceptionControllerAdvisor {
         return errorDto;
     }
 
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDto handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public final ErrorDto handleValidationExceptions(MethodArgumentNotValidException exception) {
         ErrorDto errorDto = new ErrorDto();
+
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach(error -> {
+        exception.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
+
+            errors.put(fieldName,errorMessage);
         });
         errorDto.setCode(BAD_REQUEST_CODE);
         errorDto.setMessage(BAD_REQUEST_MESSAGE);
         errorDto.setErrors(errors);
         return errorDto;
     }
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    public ErrorDto handleValidationExceptions(
+//            MethodArgumentNotValidException ex) {
+//        ErrorDto errorDto = new ErrorDto();
+//        Map<String, String> errors = new HashMap<>();
+//        ex.getBindingResult().getAllErrors().forEach(error -> {
+//            String fieldName = ((FieldError) error).getField();
+//            String errorMessage = error.getDefaultMessage();
+//            errors.put(fieldName, errorMessage);
+//        });
+//        errorDto.setCode(BAD_REQUEST_CODE);
+//        errorDto.setMessage(BAD_REQUEST_MESSAGE);
+//        errorDto.setErrors(errors);
+//        return errorDto;
+//    }
 
 
 
@@ -60,3 +78,6 @@ public class ExceptionControllerAdvisor {
     }
 
 }
+
+
+

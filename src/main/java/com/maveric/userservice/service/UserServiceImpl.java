@@ -42,15 +42,16 @@ public class UserServiceImpl implements UserService {
         }
     }
     public UserResponse createUser(UserResponse userResponse) {
-//        User user = mapper.map(userResponse);
-//        User userResult = repository.save(user);
-//        return  mapper.map(userResult);
-
 
 
         String pass = passwordEncoder.encode(userResponse.getPassword());
         userResponse.setPassword(pass);
         User user = mapper.map(userResponse);
+
+        if (repository.findByEmail(user.getEmail())!=null){
+            throw new EmailAlreadyExist("Email Already Exist");
+        }
+
         User userResult = repository.save(user);
         return  mapper.map(userResult);
 

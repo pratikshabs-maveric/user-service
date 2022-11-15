@@ -14,49 +14,41 @@ import static com.maveric.userservice.constants.Constants.*;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    //    @ExceptionHandler(MethodArgumentNotValidException.class)
-    //    public ResponseEntity<Map<String, String>> handleMethodArgsNotValidException(MethodArgumentNotValidException ex, HttpStatus status) {
-    //        Map<String, String> resp = new HashMap<>();
-    //        ex.getBindingResult().getAllErrors().forEach((error) -> {
-    //            String fieldName = ((FieldError) error).getField();
-    //            String message = error.getDefaultMessage();
-    //            resp.put(fieldName, message);
-    //        });
-    //        return new ResponseEntity<Map<String, String>>(resp, HttpStatus.BAD_REQUEST);
-    //}
+    @ExceptionHandler(EmailAlreadyExist.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public final ErrorDto handleUEmailAlreadyExistException(EmailAlreadyExist exception) {
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setCode(EMAIL_ALREADY_EXIST);
+        errorDto.setMessage(exception.getMessage());
+        return errorDto;
+    }
+
+
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public final ErrorDto handleValidationsExceptions(MethodArgumentNotValidException exception) {
+//        ErrorDto errorDto = new ErrorDto();
+//        errorDto.setCode(BAD_REQUEST_CODE);
+//        errorDto.setMessage(BAD_REQUEST_MESSAGE);
+//        return errorDto;
+//    }
 
     // Firstname, lastname, empty fields handled
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDto handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        ErrorDto errorDto = new ErrorDto();
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        errorDto.setCode(BAD_REQUEST_CODE);
-        errorDto.setMessage(BAD_REQUEST_MESSAGE);
-        errorDto.setErrors(errors);
-        return errorDto;
-    }
-
-    // Gender and date validation
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDto handleHttpMessageNotReadableException(
-            HttpMessageNotReadableException ex) {
-        ErrorDto errorDto = new ErrorDto();
-        errorDto.setCode(BAD_REQUEST_CODE);
-        System.out.println(ex.getMessage());
-        if(ex.getMessage().contains("com.maveric.userservice.enumeration.Gender"))
-            errorDto.setMessage(INVALID_INPUT_TYPE);
-        else
-            errorDto.setMessage(HttpMessageNotReadableException_MESSAGE);
-        return errorDto;
-    }
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    public ErrorDto handleValidationExceptions(
+//            MethodArgumentNotValidException ex) {
+//        ErrorDto errorDto = new ErrorDto();
+//        Map<String, String> errors = new HashMap<>();
+//        ex.getBindingResult().getAllErrors().forEach(error -> {
+//            String fieldName = ((FieldError) error).getField();
+//            String errorMessage = error.getDefaultMessage();
+//            errors.put(fieldName, errorMessage);
+//        });
+//        errorDto.setCode(BAD_REQUEST_CODE);
+//        errorDto.setMessage(BAD_REQUEST_MESSAGE);
+//        errorDto.setErrors(errors);
+//        return errorDto;
+//    }
 
     // user not found
     @ExceptionHandler(UserNotExist.class)

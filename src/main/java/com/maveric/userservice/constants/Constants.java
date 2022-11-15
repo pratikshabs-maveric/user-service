@@ -14,7 +14,7 @@ public class Constants {
     public static final String ENUM_INVALID="400";
     public static final String BAD_REQUEST_CODE="400";
     public static final String BAD_REQUEST_MESSAGE="Invalid inputs!";
-
+    public static final String EMAIL_ALREADY_EXIST="400";
     public static final String INVALID_INPUT_TYPE="Gender should be MALE/FEMALE";
 
     public static final String HttpMessageNotReadableException_MESSAGE="Format Miss Matching";

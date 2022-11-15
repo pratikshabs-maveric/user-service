@@ -39,6 +39,7 @@ public class UserResponse {
     private String address;
 
     @NotNull(message = "Date of Birth is mandatory")
+//    @Past(message = "Date Should be past")
     private String dateOfBirth;
 
     @Enumerated(EnumType.STRING)
