@@ -1,6 +1,7 @@
 package com.maveric.userservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.maveric.userservice.enumeration.Gender;
 import lombok.*;
 
@@ -46,7 +47,8 @@ public class UserResponse {
     @NotNull(message = "Gender is mandatory 'MALE' or 'FEMALE'")
     private Gender gender;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+//    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotBlank(message = "Password is mandatory")
     private String Password;
 }
