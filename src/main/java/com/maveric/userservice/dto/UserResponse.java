@@ -2,16 +2,20 @@ package com.maveric.userservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.maveric.userservice.constants.DateDeSerializer;
+import com.maveric.userservice.constants.PhoneNumber;
 import com.maveric.userservice.enumeration.Gender;
 import lombok.*;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor
 @Builder
 public class UserResponse {
@@ -28,6 +32,7 @@ public class UserResponse {
 
     private String middleName;
 
+    @PhoneNumber(message = "This phone number is not valid")
     @NotEmpty(message = "Please enter Phone Number")
     @Size(min=10, max=10, message = "Number cannot be Less than 10 DIGITS")
     private String phoneNumber;
@@ -39,9 +44,11 @@ public class UserResponse {
     @NotEmpty(message = "Please enter the address")
     private String address;
 
+    @JsonDeserialize(using = DateDeSerializer.class)
     @NotNull(message = "Date of Birth is mandatory")
 //    @Past(message = "Date Should be past")
-    private String dateOfBirth;
+//    private String dateOfBirth;
+    private LocalDateTime dateOfBirth;
 
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Gender is mandatory 'MALE' or 'FEMALE'")

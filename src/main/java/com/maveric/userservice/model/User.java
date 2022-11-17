@@ -10,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +29,8 @@ public class User {
     private String phoneNumber;
     private String email;
     private String address;
-    private String dateOfBirth;
+//    private String dateOfBirth;
+    private LocalDateTime dateOfBirth;
     private Gender gender;
     private String Password;
 
