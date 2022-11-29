@@ -39,18 +39,7 @@ public class UserServiceController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private static final Logger logger = LoggerFactory.getLogger(UserServiceController.class);
-
-    @GetMapping("/users/{userId}")
-    public ResponseEntity<UserDto> getUserDetails(@PathVariable String userId,@RequestHeader(value = "userId") String headerUserId){
-        if(userId.equals(headerUserId)) {
-            UserDto userDetails = userService.getUserDetails(userId);
-            logger.info(ErrorAndSuccessMessageConstants.USER_FOUND+userId);
-            return ResponseEntity.status(HttpStatus.OK).body(userDetails);
-        }else{
-            logger.info(USER_ID_MISMATCH);
-            throw new UserIdMismatch(USER_ID_MISMATCH);
-        }
-    }
+    
     @GetMapping("/users")
     public ResponseEntity<List<UserDto>> getUsers(@RequestParam int page , @RequestParam int pageSize) {
         List<UserDto> usersDetails = userService.getUsersDetails(page, pageSize);
@@ -58,37 +47,4 @@ public class UserServiceController {
         return ResponseEntity.status(HttpStatus.OK).body(usersDetails);
     }
 
-    @GetMapping("/users/getUserByEmail/{emailId}")
-    public ResponseEntity<UserEmailDto> getUserDetailsByEmail(@PathVariable String emailId){
-        UserEmailDto userDetails = userService.getUserDetailsByEmail(emailId);
-        logger.info(ErrorAndSuccessMessageConstants.USER_FOUND_BY_EMAIL+emailId);
-        return ResponseEntity.status(HttpStatus.OK).body(userDetails);
-    }
-    @DeleteMapping("/users/{userId}")
-    public ResponseEntity<Object> deleteUserDetails(@PathVariable String userId,@RequestHeader(value = "userId") String headerUserId) {
-        if(userId.equals(headerUserId)) {
-            String desc = userService.deleteUser(userId);
-            logger.info(ErrorAndSuccessMessageConstants.USER_DELETE+userId);
-            return ResponseEntity.status(HttpStatus.OK).body(desc);
-        }else{
-            throw new UserIdMismatch(USER_ID_MISMATCH);
-        }
-    }
-    @PutMapping("/users/{userId}")
-    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable String userId,@RequestHeader(value = "userId") String headerUserId) {
-        if(headerUserId.equals(userId) && userId.equals(userDto.getId())) {
-            UserDto userDetails = userService.updateUserDetails(userDto, userId);
-            logger.info(ErrorAndSuccessMessageConstants.USER_UPDATE+userId);
-            return ResponseEntity.status(HttpStatus.OK).body(userDetails);
-        }else{
-            throw new UserIdMismatch(USER_ID_MISMATCH);
-        }
-    }
-    @PostMapping("/users")
-    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
-        userDto.setPassword(this.bCryptPasswordEncoder.encode(userDto.getPassword()));
-        UserDto userDetails = userService.createUserDetails(userDto);
-        logger.info(ErrorAndSuccessMessageConstants.USER_CREATE+userDetails.getEmail());
-        return ResponseEntity.status(HttpStatus.CREATED).body(userDetails);
-    }
 }
